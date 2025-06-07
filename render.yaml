@@ -2,6 +2,13 @@
 
 
 
+
+
+
+build:
+  env:
+    NODE_VERSION: 18
+
 services:
   - type: web
     name: police-app
@@ -11,9 +18,8 @@ services:
     startCommand: node backend/server.js
     envVars:
       - key: MONGO_URI
-        fromEnv: MONGO_URI
+        fromEnvVar: MONGO_URI
       - key: JWT_SECRET
-        fromEnv: JWT_SECRET
+        fromEnvVar: JWT_SECRET
       - key: PORT
-        fromEnv: PORT
-    nodeVersion: 18
+        fromEnvVar: PORT
