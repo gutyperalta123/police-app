@@ -1,0 +1,17 @@
+
+
+
+services:
+  - type: web
+    name: police-app           # Nombre visible en Render
+    env: node                  # Usa entorno Node.js
+    buildCommand: |            # Esto Render lo ejecuta para construir la app
+      cd backend && npm install              # instala dependencias del backend
+      cd ../frontend && npm install          # instala dependencias del frontend
+      npm run build                         # compila React en frontend/build
+    startCommand: node backend/server.js    # inicia el servidor que ya sirve el frontend
+    envVars:
+      - key: MONGO_URI                      # tu URI de base de datos MongoDB Atlas
+        value: mongodb+srv://usuario:...
+      - key: JWT_SECRET
+        value: clave-super-secreta
