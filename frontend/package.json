@@ -2,12 +2,13 @@
   "name": "frontend",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "start": "serve -s build",
-    "build": "node build.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+ "scripts": {
+  "start": "serve -s build",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+ },
+
   "dependencies": {
     "autoprefixer": "^10.0.0",
     "axios": "^1.9.0",
