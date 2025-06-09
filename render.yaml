@@ -2,7 +2,7 @@
 
 build:
   env:
-    NODE_VERSION: 20
+    NODE_VERSION: 18
 
 services:
   - type: web

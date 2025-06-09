@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
+    "scripts": {
     "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",

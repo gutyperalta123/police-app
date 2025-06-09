@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from 'react'
 import axios from 'axios'
 
@@ -12,7 +9,7 @@ const Login = ({ setToken, setUsername }) => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/usuarios/login', formData)
+      const res = await axios.post('https://police-app-backend.onrender.com/api/usuarios/login', formData)
       const token = res.data.token
       const payload = JSON.parse(atob(token.split('.')[1]))
       localStorage.setItem('token', token)
@@ -27,7 +24,7 @@ const Login = ({ setToken, setUsername }) => {
 
   const handleRegister = async () => {
     try {
-      await axios.post('http://localhost:5000/api/usuarios/create', {
+      await axios.post('https://police-app-backend.onrender.com/api/usuarios/create', {
         username: newUser.username,
         password: newUser.password
       })
