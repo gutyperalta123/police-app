@@ -20,9 +20,11 @@ app.use('/api/usuarios', userRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT || 5000, () => {
-      console.log('🚓 Servidor iniciado en puerto 5000')
-    })
+    const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+  console.log(`🚓 Servidor iniciado en puerto ${PORT}`)
+})
+
     crearAdminSiNoExiste()
   })
   .catch((err) => {

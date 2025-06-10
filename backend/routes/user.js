@@ -9,25 +9,25 @@ const jwt = require('jsonwebtoken')
 const { verifyToken, isAdmin } = require('../middleware/auth')
 
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body
-  const user = await User.findOne({ username, password })
-  if (user) {
-    const token = jwt.sign({ username: user.username, role: user.role }, 'secreto', { expiresIn: '1h' })
-    res.json({ token })
-  } else {
-    res.status(401).json({ message: 'credenciales inválidas' })
-  }
-})
-
-router.post('/create', verifyToken, isAdmin, async (req, res) => {
-  const { username, password } = req.body
-  const newUser = new User({ username, password, role: 'user' })
+  console.log('🟡 POST /login recibido con:', req.body) // <--- LOG NUEVO
   try {
-    await newUser.save()
-    res.status(201).json({ message: 'usuario creado correctamente' })
-  } catch (err) {
-    res.status(500).json({ message: 'error al crear el usuario' })
+    const { username, password } = req.body
+    const user = await User.findOne({ username })
+    if (!user || user.password !== password) {
+      console.log('🔴 Usuario o contraseña inválidos')
+      return res.status(401).json({ message: 'Credenciales inválidas' })
+    }
+
+    const token = jwt.sign(
+      { userId: user._id, username: user.username, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    )
+
+    console.log('🟢 Usuario autenticado:', username)
+    res.json({ token })
+  } catch (error) {
+    console.error('❌ Error en /login:', error)
+    res.status(500).json({ message: 'Error del servidor' })
   }
 })
-
-module.exports = router
