@@ -3,7 +3,12 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-app.use(cors())
+// ✅ Configuración específica de CORS
+app.use(cors({
+  origin: 'https://police-app-frontend.onrender.com',
+  credentials: true
+}))
+
 app.use(express.json())
 
 const objectRoutes = require('./routes/objects')
