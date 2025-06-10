@@ -3,12 +3,15 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-// 🔒 PERMITIR CORS SOLO DESDE TU FRONTEND EN RENDER
+// CORS configurado para aceptar desde tu frontend en Render
 app.use(cors({
   origin: 'https://police-app-frontend.onrender.com',
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }))
+
+// Manejar preflight requests (OPTIONS)
+app.options('*', cors())
 
 app.use(express.json())
 
@@ -21,10 +24,9 @@ app.use('/api/usuarios', userRoutes)
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-  console.log(`🚓 Servidor iniciado en puerto ${PORT}`)
-})
-
+    app.listen(PORT, () => {
+      console.log(`🚓 Servidor iniciado en puerto ${PORT}`)
+    })
     crearAdminSiNoExiste()
   })
   .catch((err) => {
