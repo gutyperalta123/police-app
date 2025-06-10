@@ -3,13 +3,11 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-// Permitir solicitudes desde el frontend desplegado
-const frontendURL = 'https://police-app-frontend.onrender.com'
-
+// 🔒 PERMITIR CORS SOLO DESDE TU FRONTEND EN RENDER
 app.use(cors({
-  origin: frontendURL,
+  origin: 'https://police-app-frontend.onrender.com',
   methods: ['GET', 'POST', 'DELETE'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.use(express.json())
