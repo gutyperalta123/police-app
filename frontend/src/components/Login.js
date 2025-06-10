@@ -18,19 +18,23 @@ const Login = ({ setToken, setUsername }) => {
       setUsername(payload.username)
       alert('Inicio de sesión exitoso')
     } catch (err) {
-      alert('Error al iniciar sesión')
-    }
+  console.error('Error al iniciar sesión:', err)
+  alert('Error al iniciar sesión')
+}
+
   }
 
   const handleRegister = async () => {
     try {
       await axios.post('https://police-app-backend.onrender.com/api/usuarios/create', {
+        nombre: newUser.nombre,
         username: newUser.username,
         password: newUser.password
       })
       alert('Usuario registrado correctamente')
       setShowRegister(false)
     } catch (err) {
+      console.error('Error al registrar:', err.response?.data || err.message)
       alert('Error al registrar usuario')
     }
   }
