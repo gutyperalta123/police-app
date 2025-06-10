@@ -1,8 +1,3 @@
-
-
-
-
-
 const express = require('express')
 const router = express.Router()
 const ObjectItem = require('../models/ObjectItem')
