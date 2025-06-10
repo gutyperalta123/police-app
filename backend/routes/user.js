@@ -3,8 +3,6 @@ const router = express.Router()
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { verifyToken, isAdmin } = require('../middleware/auth')
-
-r// Ruta para crear usuario
 router.post('/create', async (req, res) => {
   try {
     const { username, password } = req.body
